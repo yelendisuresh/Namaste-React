@@ -7,7 +7,7 @@
     "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest"
-   },
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yelendisuresh/Namaste-React.git"
@@ -26,10 +26,10 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.2"
   },
   "browserslist": [
     "last 10 Chrome versions"
   ]
 }
-
