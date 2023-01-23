@@ -8,6 +8,8 @@
 .nav-items > ul{
     list-style-type: none;
     display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
 .nav-items > ul > li {
@@ -32,4 +34,19 @@
 .restaurant-list {
     display: flex;
     flex-wrap: wrap;
+}
+
+.shimmer-card {
+    width: 200px;
+    height: 200px;
+    background: lightgrey;
+    margin: 20px;
+}
+
+.menu {
+    display: flex;
+}
+
+a{
+ text-decoration: none;
 }
