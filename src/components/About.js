@@ -21,7 +21,7 @@ class About extends Component {
         <p>
           This is the Namaste React Live Course Chapter 07 - Finding the Path 🚀
         </p>
-        <ProfileFunctionalComponet />
+        <Profile />
       </div>
     );
   }
