@@ -46,29 +46,37 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <input
-        type="text"
-        placeholder="search"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          const data = filterData(searchText, allResturants);
-          setFilteredRstaurants(data);
-        }}
-      >
-        search
-      </button>
-      <div className="restaurant-list">
-        {filteredRestaurants.length === 0 ? <p> No Resturant Found</p> : null}
+      <div className="search-container p-5 bg-pink-50 my-5">
+        <input
+          type="text"
+          className="focus:bg-green-200 p-2 m-2"
+          placeholder="Search"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        />
+        <button
+          className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
+          onClick={() => {
+            //need to filter the data
+            const data = filterData(searchText, allRestaurants);
+            // update the state - restaurants
+            setFilteredRestaurants(data);
+          }}
+        >
+          Search
+        </button>
+      </div>
+      <div className="flex flex-wrap ">
+        {/* You have to write logic for NO restraunt fount here */}
         {filteredRestaurants.map((restaurant) => {
           return (
             <Link
               to={"/restaurant/" + restaurant.data.id}
               key={restaurant.data.id}
             >
-              <RestaurantCard key={restaurant.id} {...restaurant.data} />
+              <RestaurantCard {...restaurant.data} />
             </Link>
           );
         })}
