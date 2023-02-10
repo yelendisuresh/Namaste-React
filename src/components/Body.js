@@ -1,5 +1,5 @@
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
@@ -8,10 +8,12 @@ import useRestaurant from "../utils/useRestaurant";
 import { RESTAURANT_LIST } from "../constants";
 
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [allResturants, setAllResturants] = useState([]);
   const [filteredRestaurants, setFilteredRstaurants] = useState([]);
+  const { user, setUser } = useContext(UserContext);
   // const res = useRestaurant(RESTAURANT_LIST);
   // setAllResturants(res?.data?.cards[2]?.data?.data?.cards);
   // setFilteredRstaurants(res?.data?.cards[2]?.data?.data?.cards);
@@ -56,30 +58,44 @@ const Body = () => {
             setSearchText(e.target.value);
           }}
         />
+
         <button
           className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
           onClick={() => {
             //need to filter the data
-            const data = filterData(searchText, allRestaurants);
+            const data = filterData(searchText, allResturants);
             // update the state - restaurants
-            setFilteredRestaurants(data);
+            setFilteredRstaurants(data);
           }}
         >
           Search
         </button>
+        <input
+          tye="text"
+          value={user.name}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+        />
+        <input
+          tye="text"
+          value={user.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        />
       </div>
       <div className="flex flex-wrap ">
-        {/* You have to write logic for NO restraunt fount here */}
-        {filteredRestaurants.map((restaurant) => {
-          return (
-            <Link
-              to={"/restaurant/" + restaurant.data.id}
-              key={restaurant.data.id}
-            >
-              <RestaurantCard {...restaurant.data} />
-            </Link>
-          );
-        })}
+        {filteredRestaurants.length === 0 ? (
+          <p> NO restruant found</p>
+        ) : (
+          filteredRestaurants.map((restaurant) => {
+            return (
+              <Link
+                to={"/restaurant/" + restaurant.data.id}
+                key={restaurant.data.id}
+              >
+                <RestaurantCard {...restaurant.data} />
+              </Link>
+            );
+          })
+        )}
       </div>
     </>
   );

@@ -11,4 +11,5 @@ chapter 7: useEffect, react hook rules, formik, react router dom(client side rou
 chapter 8: class based components, lifecycle methods, rendering phases(render, commit phase(modifying DOM))
 
 chapter 9: custom hooks (why, how, when),utility or helper or shared folder, lazy suspense(lazy loading/ on deamnd loading)
-Chapter10: tailwind css styled components, , Material UI
+Chapter 10: tailwind css styled components, , Material UI
+chapter 11:state props , props drilling , react dev tools, passing data from child to parent, lifting state up,profiler, context in functional , class based components
