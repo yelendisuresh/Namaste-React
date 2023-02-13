@@ -4,13 +4,20 @@ import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
 import { FETCH_MENU_URL } from "../constants";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params
   const { resId } = useParams();
+  const dispatch = useDispatch();
   console.log("resId", resId);
   // Use proper names
   const restaurant = useRestaurant(FETCH_MENU_URL + resId);
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   if (!restaurant) {
     return null;
@@ -19,7 +26,7 @@ const RestaurantMenu = () => {
   return !restaurant ? (
     <Shimmer />
   ) : (
-    <div className="menu">
+    <div className="flex">
       <div>
         <h1>Restraunt id: {resId}</h1>
         <h2>{restaurant?.name}</h2>
@@ -29,11 +36,19 @@ const RestaurantMenu = () => {
         <h3>{restaurant?.avgRating} stars</h3>
         <h3>{restaurant?.costForTwoMsg}</h3>
       </div>
-      <div>
+      <div className="p-5">
         <h1>Menu</h1>
         <ul>
           {Object.values(restaurant?.menu?.items).map((item) => (
-            <li key={item.id}>{item.name}</li>
+            <li key={item.id}>
+              {item.name}-{" "}
+              <button
+                className="p-1 bg-green-50"
+                onClick={() => addFoodItem(item)}
+              >
+                Add
+              </button>
+            </li>
           ))}
         </ul>
       </div>
