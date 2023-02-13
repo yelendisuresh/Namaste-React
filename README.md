@@ -15,3 +15,6 @@ Chapter 10: tailwind css styled components, , Material UI
 chapter 11:state props , props drilling , react dev tools, passing data from child to parent, lifting state up,profiler, context in functional , class based components, nested context
 
 chapter 12: Redux toolkit react-redux , cart feature, redux dev tools
+
+![image](https://user-images.githubusercontent.com/19219572/218433080-4a73213c-b1ef-41fc-8445-60a57c3bd515.png)
+
