@@ -16,5 +16,4 @@ chapter 11:state props , props drilling , react dev tools, passing data from chi
 
 chapter 12: Redux toolkit react-redux , cart feature, redux dev tools
 
-![image](https://user-images.githubusercontent.com/19219572/218433080-4a73213c-b1ef-41fc-8445-60a57c3bd515.png)
-
+![STOREFLOW](https://user-images.githubusercontent.com/19219572/218433322-4991eb11-c99c-45fb-8dc5-6c639ac75f01.png)
