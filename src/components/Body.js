@@ -23,9 +23,7 @@ const Body = () => {
   }, []);
   async function getResturants() {
     try {
-      const data = await fetch(
-        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&page_type=DESKTOP_WEB_LISTING"
-      );
+      const data = await fetch(RESTAURANT_LIST);
       const res = await data.json();
       console.log("data", res?.data?.cards[2]?.data?.data?.cards);
       // optinal chaining
@@ -47,12 +45,12 @@ const Body = () => {
   return allResturants?.length === 0 ? (
     <Shimmer />
   ) : (
-    <>
-      <div className="search-container p-5 bg-pink-50 my-5">
+    <div className="bg-slate-50 ">
+      <div className="search-container  p-5 my-5 flex justify-center">
         <input
           type="text"
-          className="focus:bg-green-200 p-2 m-2"
-          placeholder="Search"
+          className="border-solid border-black p-2 m-2  w-2/5 rounded-lg "
+          placeholder="Search for resturant"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -70,7 +68,7 @@ const Body = () => {
         >
           Search
         </button>
-        <input
+        {/* <input
           tye="text"
           value={user.name}
           onChange={(e) => setUser({ ...user, name: e.target.value })}
@@ -79,7 +77,7 @@ const Body = () => {
           tye="text"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
-        />
+        /> */}
       </div>
       <div className="flex flex-wrap ">
         {filteredRestaurants.length === 0 ? (
@@ -97,7 +95,7 @@ const Body = () => {
           })
         )}
       </div>
-    </>
+    </div>
   );
 };
 
