@@ -79,7 +79,7 @@ const Body = () => {
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         /> */}
       </div>
-      <div className="flex flex-wrap ">
+      <div className="flex flex-wrap justify-center align-center width- [auto] ">
         {filteredRestaurants.length === 0 ? (
           <p> NO restruant found</p>
         ) : (
