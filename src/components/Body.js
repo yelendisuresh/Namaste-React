@@ -111,7 +111,7 @@ const Body = () => {
           cost
         </button>
       </div> */}
-      <div className="flex flex-wrap justify-center align-center width- [auto] ">
+      <div className="container mx-auto py-4 grid grid-cols-5 gap-1 ">
         {filteredRestaurants.length === 0 ? (
           <p> NO restruant found</p>
         ) : (

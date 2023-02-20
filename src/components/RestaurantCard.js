@@ -16,7 +16,7 @@ const RestrauntCard = ({
   //   user: { name: userName, email },
   // } = useContext(UserContext);
   return (
-    <div className="w-56 cursor-pointer rounded-md m-5 p-2 shadow-lg ">
+    <div className="w-56 m-5 shadow-lg h-full rounded-md p-4 transition-shadow   shadow-slate-200 hover:shadow-md hover:cursor-pointer ">
       <img src={IMG_CDN_URL + cloudinaryImageId} className="width-[100%]" />
       <h2 className=" font-serif font-medium text-xl">{name}</h2>
       <h3>{cuisines.join(", ")}</h3>
