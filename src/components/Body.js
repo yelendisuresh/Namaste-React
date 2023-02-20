@@ -33,6 +33,18 @@ const Body = () => {
       console.log("error", error);
     }
   }
+
+  const sortByDelivderyTime = (sortType, allResturants) => {
+    return allResturants.sort(
+      (a, b) => b.data["deliveryTime"] - a.data["deliveryTime"]
+    );
+  };
+
+  const sortByCost = (cost, allResturants) => {
+    return allResturants.sort(
+      (a, b) => a.data["minDeliveryTime"] - b.data["minDeliveryTime"]
+    );
+  };
   console.log("render");
   const offline = useOnline();
   if (!offline) {
@@ -79,6 +91,26 @@ const Body = () => {
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         /> */}
       </div>
+      {/* <div>
+        <button
+          className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
+          onClick={() => {
+            const data = sortByDelivderyTime("deliveryTime", allResturants);
+            setFilteredRstaurants(data);
+          }}
+        >
+          delivery time
+        </button>
+        <button
+          className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
+          onClick={() => {
+            const data = sortByCost("cost", allResturants);
+            setFilteredRstaurants(data);
+          }}
+        >
+          cost
+        </button>
+      </div> */}
       <div className="flex flex-wrap justify-center align-center width- [auto] ">
         {filteredRestaurants.length === 0 ? (
           <p> NO restruant found</p>

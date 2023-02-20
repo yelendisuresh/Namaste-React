@@ -8,7 +8,7 @@ const RestrauntCard = ({
   name,
   cuisines,
   area,
-  lastMileTravelString,
+  deliveryTime,
   costForTwoString,
   avgRating,
 }) => {
@@ -50,7 +50,7 @@ const RestrauntCard = ({
           {avgRating}
         </h4>
         <h4>•</h4>
-        <h4>{lastMileTravelString}</h4>
+        <h4>{deliveryTime} mins</h4>
         <h4>•</h4>
         <h4>{costForTwoString}</h4>
       </div>

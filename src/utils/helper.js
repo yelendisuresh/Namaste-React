@@ -6,3 +6,9 @@ export function filterData(searchText, restaurants) {
   });
   return filterData;
 }
+
+export function sortByField(searchText, restaurants) {
+  return function (a, b) {
+    return (a[field] > b[field]) - (a[field] < b[field]);
+  };
+}
