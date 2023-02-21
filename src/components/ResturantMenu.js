@@ -31,7 +31,10 @@ const RestaurantMenu = () => {
     <Shimmer />
   ) : (
     <div className="mt-40">
-      <div className="flex justify-evenly  text-white  items-center bg-gray-900">
+      <div
+        className="flex  flex-col items-center justify-evenly text-white bg-gray-900  
+      sm:flex-row md:flex-column "
+      >
         <img
           className="w-96 m-2"
           src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
@@ -56,7 +59,7 @@ const RestaurantMenu = () => {
           {Object.values(restaurant?.menu?.items).map((item) => (
             <li
               key={item.id}
-              className="flex border-b py-3 overflow-wrap-break-word"
+              className="flex  flex-col sm:flex-row border-b py-3 overflow-wrap-break-word"
             >
               <div>
                 <p className="my-2 w-96  ">{item.name}</p>

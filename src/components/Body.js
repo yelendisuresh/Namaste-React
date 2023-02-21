@@ -114,7 +114,7 @@ const Body = () => {
         </button>
       </div> */}
       <div
-        className="container mx-auto py-4 grid grid-cols-auto gap-1  md:grid-cols-3 lg:grid-cols-5 sm:grid-col-2"
+        className="container mx-auto py-4 grid grid-cols-auto gap-1  md:grid-cols-2 lg:grid-cols-5 sm:grid-col-2"
         data-testid="resturant-list"
       >
         {filteredRestaurants.length === 0 ? (

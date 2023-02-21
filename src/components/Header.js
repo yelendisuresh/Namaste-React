@@ -10,7 +10,7 @@ import UserContext from "../utils/UserContext";
 const Title = () => (
   <a href="/">
     <img
-      className="logo w-24  place-items-center"
+      className="logo w-24  place-items-center hidden md:block"
       width={"30px"}
       data-testid="logo"
       alt="logo"
@@ -30,12 +30,13 @@ const Header = () => {
 
   return (
     <div
-      className="flex justify-between items-center bg-pink-50 shadow-lg
-     sm:bg-blue-50 md:bg-yellow-50 fixed top-0 left-0 right-0 p-3 z-10"
+      className="flex  flex-col justify-between items-center bg-pink-50 shadow-lg
+     sm:bg-blue-50 md:bg-yellow-50  top-0 left-0 right-0 p-3 z-10 
+     sm:flex-row "
     >
       <Title />
       <div className="nav-items">
-        <ul className="flex py-10">
+        <ul className="flex  flex-col  md:py-10  sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row ">
           <li className="px-2">
             <Link to="/">Home</Link>
           </li>
@@ -58,7 +59,7 @@ const Header = () => {
         </ul>
       </div>
       <h1 data-testid="online-status">{isOnline ? "✅" : "🔴"}</h1>
-      <span className="p-10 font-bold text-red-900">
+      <span className="p-2  sm:py-4 md:py-10 font-bold text-red-900">
         {email} -{name}
       </span>
       {isLoggedIn ? (
