@@ -54,9 +54,12 @@ const RestaurantMenu = () => {
       <div className="p-5 flex center-items justify-center">
         <ul data-testid="menu" className="flex flex-col">
           {Object.values(restaurant?.menu?.items).map((item) => (
-            <li key={item.id} className="flex border-b py-3">
+            <li
+              key={item.id}
+              className="flex border-b py-3 overflow-wrap-break-word"
+            >
               <div>
-                <p className="my-2"> {item.name}</p>
+                <p className="my-2 w-96  ">{item.name}</p>
                 <p> {`₹${item.price / 100}`}</p>
                 <p className="w-96  overflow-wrap-break-word mt-2">
                   {item.description}
