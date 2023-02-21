@@ -62,7 +62,7 @@ const Body = () => {
         <input
           data-testid="search-input"
           type="text"
-          className="border-solid border-black p-2 m-2  w-2/5 rounded-lg "
+          className="border-solid  border border-gray-400 p-2 m-2  w-2/5 rounded-lg placeholder-slate-400 contrast-more:border-slate-400 focus:border-blue-500 focus:outline-none focus:shadow-outline-blue transition duration-300 "
           placeholder="Search for resturant"
           value={searchText}
           onChange={(e) => {
@@ -114,7 +114,7 @@ const Body = () => {
         </button>
       </div> */}
       <div
-        className="container mx-auto py-4 grid grid-cols-5 gap-1 "
+        className="container mx-auto py-4 grid grid-cols-auto gap-1  md:grid-cols-3 lg:grid-cols-5 sm:grid-col-2"
         data-testid="resturant-list"
       >
         {filteredRestaurants.length === 0 ? (

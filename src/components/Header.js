@@ -29,7 +29,10 @@ const Header = () => {
   } = useContext(UserContext);
 
   return (
-    <div className="flex justify-between items-center bg-pink-50 shadow-lg sm:bg-blue-50 md:bg-yellow-50">
+    <div
+      className="flex justify-between items-center bg-pink-50 shadow-lg
+     sm:bg-blue-50 md:bg-yellow-50 fixed top-0 left-0 right-0 p-3 z-10"
+    >
       <Title />
       <div className="nav-items">
         <ul className="flex py-10">
