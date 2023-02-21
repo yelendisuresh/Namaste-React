@@ -25,7 +25,7 @@ const Body = () => {
     try {
       const data = await fetch(RESTAURANT_LIST);
       const res = await data.json();
-      console.log("data", res?.data?.cards[2]?.data?.data?.cards);
+      // console.log("data", res?.data?.cards[2]?.data?.data?.cards);
       // optinal chaining
       setAllResturants(res?.data?.cards[2]?.data?.data?.cards);
       setFilteredRstaurants(res?.data?.cards[2]?.data?.data?.cards);
@@ -45,7 +45,7 @@ const Body = () => {
       (a, b) => a.data["minDeliveryTime"] - b.data["minDeliveryTime"]
     );
   };
-  console.log("render");
+  // console.log("render");
   const offline = useOnline();
   if (!offline) {
     return <h1> offline, please check your connection!!</h1>;
@@ -60,6 +60,7 @@ const Body = () => {
     <div className="bg-slate-50 ">
       <div className="search-container  p-5 my-5 flex justify-center">
         <input
+          data-testid="search-input"
           type="text"
           className="border-solid border-black p-2 m-2  w-2/5 rounded-lg "
           placeholder="Search for resturant"
@@ -70,6 +71,7 @@ const Body = () => {
         />
 
         <button
+          data-testid="search-btn"
           className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
           onClick={() => {
             //need to filter the data
@@ -111,7 +113,10 @@ const Body = () => {
           cost
         </button>
       </div> */}
-      <div className="container mx-auto py-4 grid grid-cols-5 gap-1 ">
+      <div
+        className="container mx-auto py-4 grid grid-cols-5 gap-1 "
+        data-testid="resturant-list"
+      >
         {filteredRestaurants.length === 0 ? (
           <p> NO restruant found</p>
         ) : (

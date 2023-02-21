@@ -12,9 +12,10 @@ const Title = () => (
     <img
       className="logo w-24  place-items-center"
       width={"30px"}
+      data-testid="logo"
       alt="logo"
       src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
-    />{" "}
+    />
   </a>
 );
 
@@ -47,11 +48,13 @@ const Header = () => {
             <li className="px-2">Instamart</li>
           </Link>
           <Link to="/cart">
-            <li className="px-2">cart {cartItems.length} items</li>
+            <li className="px-2" data-testid="cart">
+              cart {cartItems.length} items
+            </li>
           </Link>
         </ul>
       </div>
-      <h1>{isOnline ? "✅" : "🔴"}</h1>
+      <h1 data-testid="online-status">{isOnline ? "✅" : "🔴"}</h1>
       <span className="p-10 font-bold text-red-900">
         {email} -{name}
       </span>

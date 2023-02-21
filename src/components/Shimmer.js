@@ -1,6 +1,6 @@
 const Shimmer = () => {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap" data-testid="shimmer">
       {Array(40)
         .fill("")
         .map((e, index) => (
