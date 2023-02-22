@@ -1,50 +1,64 @@
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
 import { filterData } from "../utils/helper";
-import useRestaurant from "../utils/useRestaurant";
-import { RESTAURANT_LIST } from "../constants";
 
 import useOnline from "../utils/useOnline";
-import UserContext from "../utils/UserContext";
+import Loader from "./Loader";
 const Body = () => {
   const [searchText, setSearchText] = useState("");
   const [allResturants, setAllResturants] = useState([]);
   const [filteredRestaurants, setFilteredRstaurants] = useState([]);
-  const { user, setUser } = useContext(UserContext);
-  // const res = useRestaurant(RESTAURANT_LIST);
-  // setAllResturants(res?.data?.cards[2]?.data?.data?.cards);
-  // setFilteredRstaurants(res?.data?.cards[2]?.data?.data?.cards);
-  useEffect(() => {
-    console.log("useeffect");
-    getResturants();
-  }, []);
+  const [offSet, setOffset] = useState(15);
+  const [loading, setLoading] = useState(false);
+
   async function getResturants() {
     try {
-      const data = await fetch(RESTAURANT_LIST);
+      const data = await fetch(
+        `https://corsanywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&offset=${offSet}&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`
+      );
       const res = await data.json();
       // console.log("data", res?.data?.cards[2]?.data?.data?.cards);
       // optinal chaining
-      setAllResturants(res?.data?.cards[2]?.data?.data?.cards);
-      setFilteredRstaurants(res?.data?.cards[2]?.data?.data?.cards);
+      // setAllResturants(res?.data?.cards[2]?.data?.data?.cards);
+      // setFilteredRstaurants(res?.data?.cards[2]?.data?.data?.cards);
+      setLoading(true);
+      setAllResturants([...allResturants, ...res?.data?.cards]);
+      setFilteredRstaurants([...allResturants, ...res?.data?.cards]);
     } catch (error) {
       console.log("error", error);
     }
   }
 
-  const sortByDelivderyTime = (sortType, allResturants) => {
-    return allResturants.sort(
-      (a, b) => b.data["deliveryTime"] - a.data["deliveryTime"]
-    );
+  useEffect(() => {
+    // getCardData();
+    getResturants();
+  }, [offSet]);
+
+  const handelInfiniteScroll = async () => {
+    // console.log("scrollHeight" + document.documentElement.scrollHeight);
+    // console.log("innerHeight" + window.innerHeight);
+    // console.log("scrollTop" + document.documentElement.scrollTop);
+    try {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 1 >=
+        document.documentElement.scrollHeight
+      ) {
+        setLoading(true);
+        setOffset((prev) => prev + 15);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const sortByCost = (cost, allResturants) => {
-    return allResturants.sort(
-      (a, b) => a.data["minDeliveryTime"] - b.data["minDeliveryTime"]
-    );
-  };
+  useEffect(() => {
+    window.addEventListener("scroll", handelInfiniteScroll);
+    return () => window.removeEventListener("scroll", handelInfiniteScroll);
+  }, []);
+
   // console.log("render");
   const offline = useOnline();
   if (!offline) {
@@ -82,39 +96,10 @@ const Body = () => {
         >
           Search
         </button>
-        {/* <input
-          tye="text"
-          value={user.name}
-          onChange={(e) => setUser({ ...user, name: e.target.value })}
-        />
-        <input
-          tye="text"
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
-        /> */}
       </div>
-      {/* <div>
-        <button
-          className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
-          onClick={() => {
-            const data = sortByDelivderyTime("deliveryTime", allResturants);
-            setFilteredRstaurants(data);
-          }}
-        >
-          delivery time
-        </button>
-        <button
-          className="p-2 m-2 bg-purple-900 hover:bg-gray-500 text-white rounded-md"
-          onClick={() => {
-            const data = sortByCost("cost", allResturants);
-            setFilteredRstaurants(data);
-          }}
-        >
-          cost
-        </button>
-      </div> */}
       <div
-        className="container mx-auto py-4 grid grid-cols-auto gap-1  md:grid-cols-2 lg:grid-cols-5 sm:grid-col-2"
+        className="container mx-auto py-4 grid grid-cols-auto gap-2  md:grid-cols-2 
+        lg:grid-cols-4 sm:grid-col-2"
         data-testid="resturant-list"
       >
         {filteredRestaurants.length === 0 ? (
@@ -126,12 +111,13 @@ const Body = () => {
                 to={"/restaurant/" + restaurant.data.id}
                 key={restaurant.data.id}
               >
-                <RestaurantCard {...restaurant.data} />
+                <RestaurantCard {...restaurant.data.data} />
               </Link>
             );
           })
         )}
       </div>
+      {loading ? <Loader /> : null}
     </div>
   );
 };
