@@ -27,10 +27,17 @@ const Cart = () => {
 
   return (
     <div className="mt-80 flex flex-wrap flex-col justify-center items-center">
-      <h1 className="font-bold text-3xl"> cart Items - {cartItems.length}</h1>
-      <button className="bg-green-100 p-2 m-5" onClick={() => clearItems()}>
-        clearcart
-      </button>
+      {cartItems.length > 0 ? (
+        <>
+          <h1 className="font-bold text-3xl">
+            {" "}
+            cart Items - {cartItems.length}
+          </h1>
+          <button className="bg-green-100 p-2 m-5" onClick={() => clearItems()}>
+            clearcart
+          </button>
+        </>
+      ) : null}
       <div>
         {uniqueCart.map((item) => {
           return (
@@ -51,7 +58,9 @@ const Cart = () => {
           <div className="font-bold">Govt and other taxes `₹200</div>
           <div className="font-bold text-xl">TO PAY {total + 200}</div>
         </>
-      ) : null}
+      ) : (
+        <h4>Your Cart is empty, please add some items</h4>
+      )}
     </div>
   );
 };

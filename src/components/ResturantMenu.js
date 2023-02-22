@@ -6,6 +6,7 @@ import useRestaurant from "../utils/useRestaurant";
 import { FETCH_MENU_URL } from "../constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "../utils/cartSlice";
+import Cart from "./Cart";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params
