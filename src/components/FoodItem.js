@@ -1,9 +1,5 @@
-import { IMG_CDN_URL } from "../constants";
-
 const FoodItem = ({
   name,
-  description,
-  cloudinaryImageId,
   price,
   id,
   cartItems,
@@ -13,8 +9,11 @@ const FoodItem = ({
 }) => {
   return (
     <div className=" p-2 m-2  flex justify-center items-center gap-3">
-      <p className="text-md w-36 ">{name}</p>
-      <div className="flex justify-between  items-center  gap-2 border border-gray-300  w-16 h-7 ">
+      <p className="text-sm w-36 font-normal  text-gray-900">{name}</p>
+      <div
+        className="flex justify-between  items-center  gap-2 border border-gray-300  w-16 h-7 
+       text-green-500"
+      >
         <button
           data-testid="add-item space-x-4"
           className="p-1 "
@@ -36,7 +35,9 @@ const FoodItem = ({
           {cartItems?.filter((x) => x.id == id).length ? "+" : "add"}
         </button>
       </div>
-      <h5> {`₹${price / 100}`}</h5>
+      <h5>
+        {`₹${(price / 100) * cartItems?.filter((x) => x.id == id).length} `}
+      </h5>
     </div>
   );
 };

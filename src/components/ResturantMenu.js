@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
@@ -12,7 +11,6 @@ const RestaurantMenu = () => {
   // how to read a dynamic URL params
   const { resId } = useParams();
   const dispatch = useDispatch();
-  console.log("resId", resId);
   const cartItems = useSelector((state) => state.cart.items);
   // Use proper names
   const restaurant = useRestaurant(FETCH_MENU_URL + resId);
@@ -40,10 +38,8 @@ const RestaurantMenu = () => {
           className="w-96 m-2"
           src={IMG_CDN_URL + restaurant?.cloudinaryImageId}
         />
-        <div>
-          {/* <h1>Restraunt id: {resId}</h1> */}
-          <h2>{restaurant?.name}</h2>
-
+        <div className="font-sans">
+          <h1>{restaurant?.name}</h1>
           <h3>{restaurant?.area}</h3>
           <h3>{restaurant?.city}</h3>
           <h3>{restaurant?.avgRating} stars</h3>
@@ -55,7 +51,7 @@ const RestaurantMenu = () => {
           <p>Free Delivery</p>
         </div>
       </div>
-      <div className="p-5 flex center-items justify-center">
+      <div className="p-3 flex center-items justify-center gap-11">
         <ul data-testid="menu" className="flex flex-col">
           {Object.values(restaurant?.menu?.items).map((item) => (
             <li
@@ -75,8 +71,8 @@ const RestaurantMenu = () => {
                   src={IMG_CDN_URL + item?.cloudinaryImageId}
                 />
                 <div
-                  className="flex justify-between bg-slate-200 border border-gray-300  absolute w-20 
-                translate-x-[38%] translate-y-[-100%] "
+                  className="flex justify-between items-center  border border-gray-300  absolute w-20 
+                translate-x-[38%] translate-y-[-100%] bg-white  text-green-500 "
                 >
                   <button
                     data-testid="add-item space-x-4"
@@ -95,7 +91,7 @@ const RestaurantMenu = () => {
 
                   <button
                     data-testid="add-item"
-                    className="p-1"
+                    className="p-1 text-green-900 "
                     onClick={() => addFoodItem(item)}
                   >
                     {cartItems.filter((x) => x.id == item.id).length
@@ -107,6 +103,9 @@ const RestaurantMenu = () => {
             </li>
           ))}
         </ul>
+        <div>
+          <Cart />
+        </div>
       </div>
     </div>
   );

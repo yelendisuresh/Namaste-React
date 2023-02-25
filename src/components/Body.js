@@ -20,11 +20,7 @@ const Body = () => {
         `https://corsanywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&offset=${offSet}&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING`
       );
       const res = await data.json();
-      // console.log("data", res?.data?.cards[2]?.data?.data?.cards);
-      // optinal chaining
-      // setAllResturants(res?.data?.cards[2]?.data?.data?.cards);
-      // setFilteredRstaurants(res?.data?.cards[2]?.data?.data?.cards);
-      setLoading(true);
+      setLoading(false);
       setAllResturants([...allResturants, ...res?.data?.cards]);
       setFilteredRstaurants([...allResturants, ...res?.data?.cards]);
     } catch (error) {
@@ -33,7 +29,6 @@ const Body = () => {
   }
 
   useEffect(() => {
-    // getCardData();
     getResturants();
   }, [offSet]);
 

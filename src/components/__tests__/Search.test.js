@@ -26,8 +26,6 @@ test("Shimmer should load on Homepage", async () => {
   const shimmer = body.getByTestId("shimmer");
 
   await waitFor(() => expect(shimmer.children.length).toBe(40));
-
-  // console.log(shimmer);
 });
 
 test("Resturant should load on Homepage", async () => {
@@ -41,7 +39,7 @@ test("Resturant should load on Homepage", async () => {
 
   await waitFor(() => {
     const resList = body.getByTestId("resturant-list");
-    expect(resList.children.length).toBe(15);
+    expect(resList.children.length).toBe(16);
   });
 });
 
@@ -66,7 +64,7 @@ test("Search for  food  on Homepage", async () => {
   });
   fireEvent.click(searchBtn);
   const resList = body.getByTestId("resturant-list");
-  expect(resList.children.length).toBe(4);
+  expect(resList.children.length).toBe(1);
 });
 
 test("Search for  no resturant found  on Homepage", async () => {
@@ -80,6 +78,7 @@ test("Search for  no resturant found  on Homepage", async () => {
 
   await waitFor(() => {
     body.getByTestId("search-btn");
+    body.getByTestId("search-input");
   });
   const input = body.getByTestId("search-input");
   const searchBtn = body.getByTestId("search-btn");

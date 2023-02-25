@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 import FoodItem from "./FoodItem";
 import { addItem, removeItem } from "../utils/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const addFoodItem = (item) => {
     dispatch(addItem(item));
   };
@@ -26,14 +28,13 @@ const Cart = () => {
       : 0;
 
   return (
-    <div className="mt-80 flex flex-wrap flex-col justify-center items-center">
+    <div className="flex flex-wrap flex-col items-center ">
       {cartItems.length > 0 ? (
         <>
           <h1 className="font-bold text-3xl">
-            {" "}
             cart Items - {cartItems.length}
           </h1>
-          <button className="bg-green-100 p-2 m-5" onClick={() => clearItems()}>
+          <button className="bg-green-200 p-2 m-5" onClick={() => clearItems()}>
             clearcart
           </button>
         </>
@@ -54,12 +55,32 @@ const Cart = () => {
       </div>
       {cartItems.length > 0 ? (
         <>
-          <div className="font-bold">Item Total {`₹${total}`}</div>
-          <div className="font-bold">Govt and other taxes `₹200</div>
-          <div className="font-bold text-xl">TO PAY {total + 200}</div>
+          <div className="flex flex-col items-end gap-x-8">
+            <div className="font-bold">
+              <label>Item Total </label>
+              {`₹${total}`}
+            </div>
+            {/* <div className="font-bold">Govt and other taxes `₹200</div> */}
+            <div className="font-bold text-md">
+              <label>TO PAY </label>
+              {total}
+            </div>
+          </div>
+          <button
+            className="bg-green-500 p-2 m-5 text-white font-serif"
+            onClick={() => navigate("/cart")}
+          >
+            CHECKOUT
+          </button>
         </>
       ) : (
-        <h4>Your Cart is empty, please add some items</h4>
+        <>
+          <h1 className="text-3xl text-gray-600 mb-2">Cart Empty</h1>
+          <img
+            className="w-80 "
+            src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_480/Cart_empty_-_menu_2x_ejjkf2"
+          ></img>
+        </>
       )}
     </div>
   );
